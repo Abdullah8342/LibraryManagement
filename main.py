@@ -1,4 +1,5 @@
 #! /bin/python
+import os
 name = []
 usernames = []
 gmail = []
@@ -9,6 +10,32 @@ def save_file(fileName,mod,data_list):
         for item in data_list:
             f.write(item + '\n')
 
+# check if the exist or not
+def checkFile():
+    path = '.username.txt' 
+    file_present = os.path.exists(path)
+    if file_present != True:
+        try:
+            save_file('name.txt','a',name)
+            save_file('username.txt','a',usernames)
+            save_file('gmail.txt','a',gmail)
+            save_file('password.txt','a',passwords)
+        except:
+            print('Error occured')
+    else:
+        pass
+checkFile()
+# check if username and password are in the files or not 
+def check(name,file,mod):
+    with open(file,mod) as f:
+        content = f.readlines()
+    for x in content:
+        x = x.strip()
+        if name == x:
+            return True
+            break
+        else:
+            continue
 def register():
     name.append(input("Enter your name: "))
     usernames.append(input("Choose your Username: "))
@@ -17,10 +44,12 @@ def register():
 def login():
     username = input("Enter username: ")
     password = input("Enter password: ")
-    if username in usernames and password in passwords:
-        print("Welcome")
+    r_username = check(username,'username.txt','r')
+    r_password = check(password,'password.txt','r')
+    if r_username == 1 and r_password == 1:
+        print('Welcome')
     else:
-        print("incorrect username or password")
+        print('Invalid user')
 def admin():
     print('UserName: Admin')
     admin_password = input('Enter Password: ')
@@ -42,7 +71,6 @@ while True:
             login()
     elif acount_ans == 'c':
         break
-
 try:
     save_file('name.txt','a',name)
     save_file('username.txt','a',usernames)
