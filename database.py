@@ -1,11 +1,20 @@
 #! /bin/python
+global present
+with open('books.txt','a') as f:
+    pass
+with open('books.txt','r') as first_char:
+    f_char = first_char.read(1)
+    if not f_char:
+        present = 1
+    else:
+        present = 0
+
 # Show the list of books if books are present
-global count
-count = 1
 def show_books():
     try:
         with open('books.txt','r') as f:
             books_list = f.readlines()
+            count = 1
         for x in books_list:
             x = x.strip()
             print("{}--> {}".format(count,x))
@@ -15,14 +24,8 @@ def show_books():
 # For adding new book into the books list
 def add_books(new_book):
     try:
-        with open('books.txt','r') as file:
-            books_list = file.readlines()
-        if new_book not in books_list:
-            with open('books.txt','a') as f:
-                f.write(new_book + '\n')
-            count +=1
-        else:
-            pass
+        with open('books.txt','a') as f:
+            f.write(new_book + '\n')
     except:
         return ('Error Occur While adding new book Try again please')
     else:
@@ -47,28 +50,26 @@ def admin_user():
         print('What did you want to do')
         choise = input('s)Show Books a)Add books d)Delet books q)Quit ')
         if choise == 's':
-            if count == 1:
+            if present == 1:
                 print('No Book present')
             else:
                 show_books()
         elif choise == 'a':
             new_book = input('Enter book name: ')
-#            new_book = new_book.title()
-            new_book_status = add_books(new_book)
+            new_book_status = add_books(new_book.title())
             print(new_book_status)
         elif choise == 'd':
-            if count == 1:
+            if present == 1:
                 print('Nothing for delet')
             else:
                 show_books()
                 index = int(input('Enter Index of book for deleting '))
-                if index > 0 and count != 1:
+                if index > 0 and present != 1:
                     delet_status = delet_book(index)
                     print(delet_status)
                 else:
                     print('Wrong Index Please Check,Try again')
         elif choise == 'q':
             break
-with open('books.txt','a') as f:
-    pass
+
 admin_user()
