@@ -10,9 +10,9 @@ with open('books.txt','r') as first_char:
         present = 0
 
 # Show the list of books if books are present
-def show_books():
+def show_books(fileName):
     try:
-        with open('books.txt','r') as f:
+        with open(fileName,'r') as f:
             books_list = f.readlines()
             count = 1
         for x in books_list:
@@ -53,7 +53,7 @@ def admin_user():
             if present == 1:
                 print('No Book present')
             else:
-                show_books()
+                show_books('books.txt')
         elif choise == 'a':
             new_book = input('Enter book name: ')
             new_book_status = add_books(new_book.title())
@@ -62,7 +62,7 @@ def admin_user():
             if present == 1:
                 print('Nothing for delet')
             else:
-                show_books()
+                show_books('books.txt')
                 index = int(input('Enter Index of book for deleting '))
                 if index > 0 and present != 1:
                     delet_status = delet_book(index)
@@ -72,4 +72,4 @@ def admin_user():
         elif choise == 'q':
             break
 
-admin_user()
+# admin_user()

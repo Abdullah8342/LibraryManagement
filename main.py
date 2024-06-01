@@ -1,5 +1,6 @@
-#! /bin/python
+'''#! /bin/python'''
 from admin import admin_user
+from simpleUser import normalUser
 import os
 name = []
 usernames = []
@@ -7,7 +8,7 @@ gmail = []
 passwords = []
 
 def save_file(fileName,mod,data_list):
-    with open(fileName,mod) as f:
+    with open(fileName,mod,encoding='utf-8') as f:
         for item in data_list:
             f.write(item + '\n')
 
@@ -21,14 +22,14 @@ def checkFile():
             save_file('username.txt','a',usernames)
             save_file('gmail.txt','a',gmail)
             save_file('password.txt','a',passwords)
-        except:
+        except ImportError:
             print('Error occured')
     else:
         pass
 checkFile()
 # check if username and password are in the files or not 
-def check(name,file,mod):
-    with open(file,mod) as f:
+def check(content,file,mod):
+    with open(file,mod ,encoding='utf-8') as f:
         content = f.readlines()
     for x in content:
         x = x.strip()
@@ -49,6 +50,7 @@ def login():
     r_password = check(password,'password.txt','r')
     if r_username == 1 and r_password == 1:
         print('Welcome')
+        normalUser()
     else:
         print('Invalid user')
 def admin():
@@ -78,5 +80,5 @@ try:
     save_file('username.txt','a',usernames)
     save_file('gmail.txt','a',gmail)
     save_file('password.txt','a',passwords)
-except:
+except ImportError:
     print('Error occured')
