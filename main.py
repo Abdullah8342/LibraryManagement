@@ -1,4 +1,5 @@
 #! /bin/python
+from admin import admin_user
 import os
 name = []
 usernames = []
@@ -55,6 +56,7 @@ def admin():
     admin_password = input('Enter Password: ')
     if admin_password == 'password':
         print("Welcome as Admin user")
+        admin_user()
     else:
         print("Wrong password")
 count = 0
