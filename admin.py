@@ -1,6 +1,6 @@
 ''' Admin User can add or delet Books from library '''
 #! /bin/python
-PRESENT = 0
+
 with open('books.txt','a', encoding='utf-8') as f:
     pass
 with open('books.txt','r',encoding='utf-8') as first_char:
