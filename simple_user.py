@@ -28,8 +28,8 @@ def remove_book(ind):
         with open('mylearning.txt','r',encoding='utf-8') as f:
             full_content = f.readlines()
             ptr = 1
-            for x in full_content:
-                with open('mylearning.txt','w',encoding='utf-8') as file:
+            with open('mylearning.txt','w',encoding='utf-8') as file:
+                for x in full_content:
                     if ptr != ind:
                         file.write(x)
                     else:
